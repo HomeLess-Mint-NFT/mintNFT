@@ -12,7 +12,7 @@
     <main>
       
       <button id="checkid" type="submit">PrincipalId</button>
-      <button id="add" type="submit">getBalance</button>
+      <button id="balance" type="submit">getBalance</button>
       <button id="connect" type="submit">Connect to plug</button>
       
       
@@ -34,6 +34,22 @@
 
       </div>
 
+
+      <br><br>
+
+      <div class="container space-y-10">
+        
+        <div>
+        <label class="text-gray-500 mb-1 block">Upload</label>
+        <input id="file" alt="file" type="file" />
+        </div>
+
+        <button id="generate">Mint</button>
+      </div>
+
+      <section id="greeting"></section>
+      <section id="balance"></section> 
+
       <br><br>
 
       <div class="container space-y-10">
@@ -47,12 +63,10 @@
           <input id="receiver-principal-id2" class="w-1/2 border-2 rounded-md border-gray-300 p-2" />
         </div>
 
-        <button id="generate">Send</button>
+        <button id="send">Send</button>
       </div>
-
-       <section id="greeting"></section>
-      <section id="balance"></section> 
       
+       
     </main>
 
     <br><br>
