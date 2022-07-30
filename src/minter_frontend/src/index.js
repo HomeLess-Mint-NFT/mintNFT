@@ -6,17 +6,23 @@ const els = {};
 function main() {
   els.btnConnect = document.querySelector("#connect");
   els.btnCheckid = document.querySelector("#checkid");
-  els.btnAdd = document.querySelector("#add");
-
-  els.name = document.querySelector('#name');
-  els.receiverPrincipalId2 = document.querySelector('#receiver-principal-id2');
-  els.generate = document.querySelector("#generate");
+  els.btnBalance = document.querySelector("#balance");
 
 
   els.receiverPrincipalId = document.querySelector('#receiver-principal-id');
   els.amount = document.querySelector('#amount');
   els.btnRequestTransfer = document.querySelector('#btn-request-transfer');
+
+
+  els.file = document.querySelector('#file');
+  els.generate = document.querySelector("#generate");
+
+  els.name = document.querySelector('#name');
+  els.receiverPrincipalId2 = document.querySelector('#receiver-principal-id2');
+  els.send = document.querySelector("#send");
+  
   els.output = document.querySelector('#output');
+
   // const button = document.getElementById("connect");
 
   // const addbutton = document.getElementById("add");
@@ -46,11 +52,14 @@ function onButtonPressHandler(el) {
     case 'checkid':
       onBtnCheckid();
       break;
+    case 'balance':
+      onBtnBalance();
+      break;
     case 'generate':
       genrateNft();
       break;
-    case 'add':
-      onBtnAdd();
+    case 'send':
+      sendNft();
       break;
     case 'btn-request-transfer':
       onBtnRequestTransfer();
@@ -107,33 +116,7 @@ async function onBtnCheckid()  {
 
 }
 
-async function genrateNft() {
-  // const name = document.getElementById("name").value.toString();
-  // const mint = await minter_backend.mint(name);
-  // outputWrite("minted...");
-  // const mintId = mint.toString();
-  // outputWrite("this id is" + mintId);
-
-  // document.getElementById("nft").src = await minter_backend.tokenURI(mint);
-  // document.getElementById("greeting").innerText = "this nft owner is " + princOfCaller + "\nthis token id is " + mintId;
-  outputWrite('onBtngenrateNft() call');
-  const to = els.receiverPrincipalId2?.value;
-  const name = Number(els.name?.value.replaceAll('_', ''));
-  const requestTransferArg = {
-    to,
-    name,
-  };
-
-  if (!to) {
-    outputWrite(`onBtngenrateNft() call failure, missing account id!`);
-    return;
-  };
-
-  const response = await window.ic?.plug?.requestTransfer(requestTransferArg);
-  outputWrite(`onBtnRequestTransfer() call response ${JSON.stringify(response)}`);
-}
-
-async function onBtnAdd() {
+async function onBtnBalance() {
   // doenst work yet
 
   // const name = document.getElementById("add").value.toString();
@@ -164,11 +147,53 @@ async function onBtnRequestTransfer() {
   outputWrite(`onBtnRequestTransfer() call response ${JSON.stringify(response)}`);
 }
 
+async function genrateNft() {
+  const idnft = document.getElementById("file").value.toString();
+  const mint = await minter_backend.mint(nft);
+  outputWrite("minted...");
+  const mintId = mint.toString();
+  outputWrite("this id is" + mintId);
+
+  document.getElementById("nft").src = await minter_backend.tokenURI(mint);
+  document.getElementById("greeting").innerText = "this nft owner is " + princOfCaller + "\nthis token id is " + mintId;
+  
+}
+
+async function sendNft() {
+  // const name = document.getElementById("name").value.toString();
+  // const mint = await minter_backend.mint(name);
+  // outputWrite("minted...");
+  // const mintId = mint.toString();
+  // outputWrite("this id is" + mintId);
+
+  // document.getElementById("nft").src = await minter_backend.tokenURI(mint);
+  // document.getElementById("greeting").innerText = "this nft owner is " + princOfCaller + "\nthis token id is " + mintId;
+  outputWrite('onBtnsendNft() call');
+  const to = els.receiverPrincipalId2?.value;
+  const name = Number(els.name?.value.replaceAll('_', ''));
+  const requestTransferArg = {
+    to,
+    name,
+  };
+
+  if (!to) {
+    outputWrite(`onBtnsendNft() call failure, missing account id!`);
+    return;
+  };
+
+  const response = await window.ic?.plug?.requestTransfer(requestTransferArg);
+  outputWrite(`onBtnRequestTransfer() call response ${JSON.stringify(response)}`);
+}
+
+
+
 // Write to the output DOM element
 function outputWrite(text) {
   els.output.textContent += (els.output.textContent ? `\n` : '') + `> ${text}`;
   els.output.scrollTop = els.output.scrollHeight;
 }
+
+
 
 document.addEventListener("DOMContentLoaded", main);
 
