@@ -10,20 +10,56 @@
   </head>
   <body>
     <main>
+      
+      <button id="checkid" type="submit">PrincipalId</button>
+      <button id="add" type="submit">getBalance</button>
       <button id="connect" type="submit">Connect to plug</button>
-      <img id="nft" src="logo.png" alt="DFINITY logo" />
-      <form action="#">
-        <label for="name">Enter a tokenURI: &nbsp;</label>
+      
+      
+      <img id="nft" src="logo.png" alt="DFINITY logo" width="250" height="300" />
+
+
+      <div class="container space-y-4">
+        <div>
+          <label class="text-gray-500 mb-1 block">Amount</label>
+          <input id="amount" class="w-1/2 border-2 rounded-md border-gray-300 p-2" />
+        </div>
+
+        <div>
+          <label class="text-gray-500 mb-1 block">Send to address</label>
+          <input id="receiver-principal-id" class="w-1/2 border-2 rounded-md border-gray-300 p-2" />
+        </div>
+        
+        <button id="btn-request-transfer">requestTransfer</button>
+
+      </div>
+
+      <br><br>
+
+      <div class="container space-y-10">
+        
+        <div>
+        <label class="text-gray-500 mb-1 block">Enter a tokenURI</label>
         <input id="name" alt="Name" type="text" />
-        <button id="generate" type="submit">Click Me!</button>
-      </form>
-      <form action="#">
-        <label for="add">Enter a principal: &nbsp;</label>
-        <input id="add" alt="Name" type="text" />
-        <button id="add" type="submit">Click Me!</button>
-      </form>
-      <section id="greeting"></section>
-      <section id="balance"></section>
+        </div>
+        <div>
+          <label class="text-gray-500 mb-1 block">Send to address</label>
+          <input id="receiver-principal-id2" class="w-1/2 border-2 rounded-md border-gray-300 p-2" />
+        </div>
+
+        <button id="generate">Send</button>
+      </div>
+
+       <section id="greeting"></section>
+      <section id="balance"></section> 
+      
     </main>
+
+    <br><br>
+
+    <div class="container" class="container mx-auto py-6 px-2 mt-20">
+      <label class="text-gray-500 mb-1 block">Output</label>
+      <textarea id="output" class="h-40 w-full border-2 rounded-md border-gray-300 p-2"></textarea>
+    </div>
   </body>
 </html>
